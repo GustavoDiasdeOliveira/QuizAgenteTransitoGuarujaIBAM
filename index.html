@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Trânsito - IBAM Guarujá</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="home-screen" class="screen active">
+            <div class="start-screen">
+                <h1 class="heading">Agente de Trânsito Guarujá (IBAM)</h1>
+                <div class="settings">
+                    <label for="category">Matéria:</label>
+                    <select id="category">
+                        <option value="portugues">📚 Português</option>
+                        <option value="matematica">🧮 Matemática</option>
+                        <option value="informatica">💻 Informática</option>
+                        <option value="transito">🚦 Trânsito CTB</option>
+                        <option value="legislacao">⚖️ Legislação Municipal</option>
+                        <option value="placas">🛑 Placas de Trânsito</option>
+                        <option value="todas">🧠 Todas as matérias</option>
+                    </select>
+
+                    <label for="num-questions">Número de perguntas:</label>
+                    <select id="num-questions">
+                        <option value="5">05</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="simulado">Simulado Completo (40 Questões)</option>
+                    </select>
+
+                    <label for="difficulty">Dificuldade:</label>
+                    <select id="difficulty">
+                        <option value="">Qualquer</option>
+                        <option value="facil">Fácil</option>
+                        <option value="medio">Média</option>
+                        <option value="dificil">Difícil</option>
+                    </select>
+                </div>
+                <button class="btn start">Iniciar Quiz</button>
+            </div>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="quiz-info">
+                    <span class="question-counter">Questão <span id="current-question">1</span>/<span
+                            id="total-questions">10</span></span>
+                    <span class="score">Pontos: <span id="score">0</span></span>
+                </div>
+            </div>
+
+            <div class="quiz-content">
+                <div class="difficulty-badge"></div>
+                <div class="question-image"></div>
+                <h2 class="question-text"></h2>
+                <div class="options-container"></div>
+            </div>
+
+            <button id="next-btn" class="next-btn hidden">Próxima Questão</button>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <div class="result-icon"></div>
+                <h1 class="result-title"></h1>
+                <div class="result-score">
+                    <span class="final-score"></span>
+                    <span class="score-label">pontos</span>
+                </div>
+                <div class="result-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="correct-answers">0</span>
+                        <span class="stat-label">Corretas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="wrong-answers">0</span>
+                        <span class="stat-label">Erradas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="question-weight">1</span>
+                        <span class="stat-label" id="weight-label">Peso p/ Questão</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="accuracy">0%</span>
+                        <span class="stat-label">Precisão</span>
+                    </div>
+                </div>
+                <div class="result-message"></div>
+                <button id="restart-btn" class="restart-btn">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

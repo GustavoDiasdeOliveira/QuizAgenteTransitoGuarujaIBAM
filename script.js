@@ -43,10 +43,7 @@ startBtn.addEventListener("click", () => {
   currentCategory = categorySelect.value;
   currentDifficulty = difficultySelect.value;
   const numValue = numQuestionsSelect.value;
-
-  // Se escolher "simulado", força 40 questões
   currentQuestionCount = numValue === "simulado" ? 40 : parseInt(numValue);
-
   startQuiz();
 });
 
@@ -71,32 +68,15 @@ function startQuiz() {
 
   let allQuestions = [];
 
-  // ✅ Caso selecione "todas as matérias", juntar todas as categorias
   if (currentCategory === "todas") {
-    Object.keys(questionsDatabase).forEach((cat) => {
-      if (currentDifficulty) {
-        // pega apenas o nível escolhido
-        allQuestions = allQuestions.concat(questionsDatabase[cat][currentDifficulty] || []);
-      } else {
-        // pega todas as dificuldades
-        Object.values(questionsDatabase[cat]).forEach((diffSet) => {
-          allQuestions = allQuestions.concat(diffSet);
-        });
-      }
-    });
+    // Simulado completo com pesos variados
+    allQuestions = buildSimuladoQuestions(currentDifficulty);
+    allQuestions = shuffleArray(allQuestions);
   } else {
-    // Categoria específica
-    if (currentDifficulty) {
-      allQuestions = questionsDatabase[currentCategory]?.[currentDifficulty] || [];
-    } else {
-      // Qualquer dificuldade — junta todas dentro da categoria
-      const categoryData = questionsDatabase[currentCategory];
-      if (categoryData) {
-        Object.values(categoryData).forEach((diffSet) => {
-          allQuestions = allQuestions.concat(diffSet);
-        });
-      }
-    }
+    // Categoria única
+    const categoryQuestions = getRandomQuestions(currentCategory, currentQuestionCount);
+    const peso = ["transito", "legislacao", "placas"].includes(currentCategory) ? 2 : 1;
+    allQuestions = categoryQuestions.map(q => ({ ...q, peso, materia: currentCategory }));
   }
 
   if (allQuestions.length === 0) {
@@ -104,15 +84,102 @@ function startQuiz() {
     return;
   }
 
-  // embaralha e corta na quantidade escolhida
-  currentQuestions = shuffleArray([...allQuestions]).slice(0, currentQuestionCount);
-
+  currentQuestions = allQuestions;
   totalQuestionsSpan.textContent = currentQuestions.length;
-  difficultyBadge.textContent = currentDifficulty ? currentDifficulty.toUpperCase() : "🧠 Simulado";
+
+  difficultyBadge.textContent =
+    currentCategory === "todas"
+      ? "🧠 Simulado Completo"
+      : currentDifficulty
+      ? currentDifficulty.toUpperCase()
+      : "MISTA";
   difficultyBadge.className = `difficulty-badge ${currentDifficulty || "mista"}`;
 
   showScreen(quizScreen);
   loadQuestion();
+}
+
+// === Pega questões aleatórias ===
+function getRandomQuestions(category, count) {
+  let catQuestions = [];
+
+  if (currentDifficulty) {
+    catQuestions = questionsDatabase[category]?.[currentDifficulty] || [];
+  } else {
+    const categoryData = questionsDatabase[category];
+    if (categoryData) {
+      Object.values(categoryData).forEach(diffSet => {
+        catQuestions = catQuestions.concat(diffSet);
+      });
+    }
+  }
+
+  return shuffleArray(catQuestions).slice(0, count);
+}
+
+// === MONTA O SIMULADO COMPLETO ===
+function buildSimuladoQuestions(difficulty) {
+  const needed = {
+    portugues: 12,
+    matematica: 4,
+    informatica: 10,
+    especificos: 14
+  };
+
+  const selected = [];
+
+  // Português (peso 1)
+  const port = getFilteredQuestions("portugues", difficulty);
+  selected.push(
+    ...selectRandomFrom(port, Math.min(needed.portugues, port.length))
+      .map(q => ({ ...q, peso: 1, materia: "portugues" }))
+  );
+
+  // Matemática (peso 1)
+  const mat = getFilteredQuestions("matematica", difficulty);
+  selected.push(
+    ...selectRandomFrom(mat, Math.min(needed.matematica, mat.length))
+      .map(q => ({ ...q, peso: 1, materia: "matematica" }))
+  );
+
+  // Informática (peso 1)
+  const info = getFilteredQuestions("informatica", difficulty);
+  selected.push(
+    ...selectRandomFrom(info, Math.min(needed.informatica, info.length))
+      .map(q => ({ ...q, peso: 1, materia: "informatica" }))
+  );
+
+  // Conhecimentos Específicos (peso 2)
+  const trans = getFilteredQuestions("transito", difficulty);
+  const legis = getFilteredQuestions("legislacao", difficulty);
+  const placas = getFilteredQuestions("placas", difficulty);
+  const allEsp = trans.concat(legis, placas);
+
+  selected.push(
+    ...selectRandomFrom(allEsp, Math.min(needed.especificos, allEsp.length))
+      .map(q => ({ ...q, peso: 2, materia: "conhecimentos" }))
+  );
+
+  return selected;
+}
+
+// === FILTRA QUESTÕES ===
+function getFilteredQuestions(category, difficulty) {
+  let result = [];
+  if (difficulty) {
+    result = questionsDatabase[category]?.[difficulty] || [];
+  } else {
+    const catData = questionsDatabase[category];
+    if (catData) {
+      Object.values(catData).forEach(diffSet => result = result.concat(diffSet));
+    }
+  }
+  return result;
+}
+
+// === SELECIONA ALEATÓRIAS ===
+function selectRandomFrom(array, count) {
+  return shuffleArray(array).slice(0, count);
 }
 
 // === Embaralhar ===
@@ -143,7 +210,8 @@ function loadQuestion() {
     questionImage.innerHTML = "";
   }
 
-  questionText.textContent = question.question;
+  // Enunciado + peso
+  questionText.innerHTML = `${question.question} <br><small class="peso-info">⚖️ Peso ${question.peso}</small>`;
   optionsContainer.innerHTML = "";
 
   question.options.forEach((option, index) => {
@@ -162,15 +230,19 @@ function selectAnswer(selectedIndex) {
 
   const question = currentQuestions[currentQuestionIndex];
   const optionButtons = document.querySelectorAll(".option-btn");
-  optionButtons.forEach((btn) => btn.classList.add("disabled"));
+  optionButtons.forEach(btn => btn.classList.add("disabled"));
 
   let feedbackHTML = "";
 
   if (selectedIndex === question.correct) {
     optionButtons[selectedIndex].classList.add("correct");
     correctAnswers++;
-    score += calculatePoints();
-    feedbackHTML = `<p class="feedback correct">✅ Acertou!</p>`;
+
+    // soma pontos conforme peso (1 ou 2)
+    const pontosGanhos = calculatePoints(question);
+    score += pontosGanhos;
+    scoreSpan.textContent = score; // atualiza topo imediatamente
+    feedbackHTML = `<p class="feedback correct">✅ Acertou! (+${pontosGanhos} ponto${pontosGanhos > 1 ? 's' : ''})</p>`;
   } else {
     optionButtons[selectedIndex].classList.add("wrong");
     optionButtons[question.correct].classList.add("correct");
@@ -190,17 +262,13 @@ function selectAnswer(selectedIndex) {
   nextBtn.classList.remove("hidden");
 }
 
-// === Pontuação ===
-function calculatePoints() {
-  switch (currentDifficulty) {
-    case "facil": return 5;
-    case "medio": return 10;
-    case "dificil": return 15;
-    default: return 5; // dificuldade mista
-  }
+// === Pontuação com Peso ===
+function calculatePoints(question) {
+  // Cada acerto vale o peso da questão (1 ou 2)
+  return question && question.peso ? question.peso : 1;
 }
 
-// === Botão Próxima Questão ===
+// === Próxima Questão ===
 nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
   if (currentQuestionIndex < currentQuestions.length) {
@@ -210,10 +278,9 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// === Mostrar Resultados ===
+// === Resultados ===
 function showResults() {
   showScreen(resultScreen);
-
   finalScore.textContent = score;
   correctAnswersSpan.textContent = correctAnswers;
   wrongAnswersSpan.textContent = wrongAnswers;

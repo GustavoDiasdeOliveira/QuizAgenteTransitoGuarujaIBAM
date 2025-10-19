@@ -69,13 +69,11 @@ function startQuiz() {
   let allQuestions = [];
 
   if (currentCategory === "todas") {
-    // Simulado completo com pesos variados
     allQuestions = buildSimuladoQuestions(currentDifficulty);
     allQuestions = shuffleArray(allQuestions);
   } else {
-    // Categoria única
     const categoryQuestions = getRandomQuestions(currentCategory, currentQuestionCount);
-    const peso = ["transito", "legislacao", "placas"].includes(currentCategory) ? 2 : 1;
+    const peso = ["transito", "legislacao"].includes(currentCategory) ? 2 : 1;
     allQuestions = categoryQuestions.map(q => ({ ...q, peso, materia: currentCategory }));
   }
 
@@ -152,8 +150,7 @@ function buildSimuladoQuestions(difficulty) {
   // Conhecimentos Específicos (peso 2)
   const trans = getFilteredQuestions("transito", difficulty);
   const legis = getFilteredQuestions("legislacao", difficulty);
-  const placas = getFilteredQuestions("placas", difficulty);
-  const allEsp = trans.concat(legis, placas);
+  const allEsp = trans.concat(legis);
 
   selected.push(
     ...selectRandomFrom(allEsp, Math.min(needed.especificos, allEsp.length))
@@ -210,17 +207,25 @@ function loadQuestion() {
     questionImage.innerHTML = "";
   }
 
-  // Enunciado + peso
   questionText.innerHTML = `${question.question} <br><small class="peso-info">⚖️ Peso ${question.peso}</small>`;
   optionsContainer.innerHTML = "";
 
   question.options.forEach((option, index) => {
     const button = document.createElement("button");
     button.className = "option-btn";
-    button.textContent = option;
+    button.innerHTML = option;
     button.addEventListener("click", () => selectAnswer(index));
     optionsContainer.appendChild(button);
   });
+
+  if (window.MathJax) {
+    if (window.MathJax.typesetPromise) {
+      MathJax.typesetPromise([questionText, optionsContainer])
+        .catch((err) => console.log('MathJax Typeset Error in loadQuestion:', err.message));
+    } else if (window.MathJax.typeset) {
+      MathJax.typeset([questionText, optionsContainer]);
+    }
+  }
 }
 
 // === Selecionar Resposta ===
@@ -237,11 +242,9 @@ function selectAnswer(selectedIndex) {
   if (selectedIndex === question.correct) {
     optionButtons[selectedIndex].classList.add("correct");
     correctAnswers++;
-
-    // soma pontos conforme peso (1 ou 2)
     const pontosGanhos = calculatePoints(question);
     score += pontosGanhos;
-    scoreSpan.textContent = score; // atualiza topo imediatamente
+    scoreSpan.textContent = score;
     feedbackHTML = `<p class="feedback correct">✅ Acertou! (+${pontosGanhos} ponto${pontosGanhos > 1 ? 's' : ''})</p>`;
   } else {
     optionButtons[selectedIndex].classList.add("wrong");
@@ -259,12 +262,20 @@ function selectAnswer(selectedIndex) {
   feedbackDiv.innerHTML = feedbackHTML;
   optionsContainer.appendChild(feedbackDiv);
 
+  if (window.MathJax) {
+    if (window.MathJax.typesetPromise) {
+      MathJax.typesetPromise([feedbackDiv])
+        .catch((err) => console.log('MathJax Typeset Error in selectAnswer:', err.message));
+    } else if (window.MathJax.typeset) {
+      MathJax.typeset([feedbackDiv]);
+    }
+  }
+
   nextBtn.classList.remove("hidden");
 }
 
 // === Pontuação com Peso ===
 function calculatePoints(question) {
-  // Cada acerto vale o peso da questão (1 ou 2)
   return question && question.peso ? question.peso : 1;
 }
 
@@ -285,7 +296,8 @@ function showResults() {
   correctAnswersSpan.textContent = correctAnswers;
   wrongAnswersSpan.textContent = wrongAnswers;
 
-  const accuracy = Math.round((correctAnswers / currentQuestions.length) * 100);
+  const totalQuestionsAnswered = currentQuestions.length;
+  const accuracy = totalQuestionsAnswered > 0 ? Math.round((correctAnswers / totalQuestionsAnswered) * 100) : 0;
   accuracySpan.textContent = `${accuracy}%`;
 
   if (accuracy === 100) {

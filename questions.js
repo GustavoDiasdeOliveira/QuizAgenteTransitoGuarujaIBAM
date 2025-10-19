@@ -2629,12 +2629,12 @@ const questionsDatabase = {
       {
         question: "No Word 2016, qual é o atalho para negrito?",
         options: ["Ctrl+I", "Ctrl+U", "Ctrl+B", "Ctrl+N"],
-        correct: 2,
-        explanation: "Ctrl+B aplica negrito ao texto selecionado.",
+        correct: 3,
+        explanation: "Ctrl+N aplica negrito ao texto selecionado.",
       },
       {
         question: "Qual função do Excel permite somar um intervalo de células?",
-        options: ["MÉDIA()", "SOMA()", "MÁXIMO()", "MÍNIMO()"],
+        options: ["=MÉDIA()", "=SOMA()", "=MÁXIMO()", "=MÍNIMO()"],
         correct: 1,
         explanation: "A função SOMA() calcula a soma de um intervalo.",
       },
@@ -2702,15 +2702,15 @@ const questionsDatabase = {
           "A correção automática substitui automaticamente palavras incorretas.",
       },
       {
-        question: "O que significa HTML?",
+        question: "No Sistema Operacional Windows Server 2019, o espaço disponível em múltiplos discos pode ser combinado em uma única unidade, convertendo os discos em",
         options: [
-          "Planilha eletrônica",
-          "Linguagem de marcação",
-          "Apresentação",
-          "Programa de e-mail",
+          "Volumes espelhados.",
+          "Partições secundárias.",
+          "Discos dinâmicos.",
+          "unidades lógicas.",
         ],
-        correct: 1,
-        explanation: "HTML é a linguagem de marcação usada para páginas web.",
+        correct: 2,
+        explanation: "DINAMICO, porque é possível combinar unidades de disco em uma única unidade e preenchê-los dinamicamente. Pode-se criar, por exemplo, um disco dinâmico contendo 50% do disco A e 50% do disco B e usá-los simultaneamente.",
       },
       {
         question: "No Windows 10, qual comando fecha uma janela ativa?",

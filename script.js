@@ -29,7 +29,6 @@ const questionText = document.querySelector(".question-text");
 const optionsContainer = document.querySelector(".options-container");
 const nextBtn = document.getElementById("next-btn");
 
-const resultIcon = document.querySelector(".result-icon");
 const resultTitle = document.querySelector(".result-title");
 const finalScore = document.querySelector(".final-score");
 const correctAnswersSpan = document.getElementById("correct-answers");
@@ -121,40 +120,45 @@ function buildSimuladoQuestions(difficulty) {
     portugues: 12,
     matematica: 4,
     informatica: 10,
-    especificos: 14
+    transito: 7,
+    legislacao: 7
   };
 
   const selected = [];
 
-  // Português (peso 1)
+  // Português
   const port = getFilteredQuestions("portugues", difficulty);
   selected.push(
     ...selectRandomFrom(port, Math.min(needed.portugues, port.length))
       .map(q => ({ ...q, peso: 1, materia: "portugues" }))
   );
 
-  // Matemática (peso 1)
+  // Matemática
   const mat = getFilteredQuestions("matematica", difficulty);
   selected.push(
     ...selectRandomFrom(mat, Math.min(needed.matematica, mat.length))
       .map(q => ({ ...q, peso: 1, materia: "matematica" }))
   );
 
-  // Informática (peso 1)
+  // Informática
   const info = getFilteredQuestions("informatica", difficulty);
   selected.push(
     ...selectRandomFrom(info, Math.min(needed.informatica, info.length))
       .map(q => ({ ...q, peso: 1, materia: "informatica" }))
   );
 
-  // Conhecimentos Específicos (peso 2)
+  // Trânsito (CTB)
   const trans = getFilteredQuestions("transito", difficulty);
-  const legis = getFilteredQuestions("legislacao", difficulty);
-  const allEsp = trans.concat(legis);
-
   selected.push(
-    ...selectRandomFrom(allEsp, Math.min(needed.especificos, allEsp.length))
-      .map(q => ({ ...q, peso: 2, materia: "conhecimentos" }))
+    ...selectRandomFrom(trans, Math.min(needed.transito, trans.length))
+      .map(q => ({ ...q, peso: 2, materia: "transito" }))
+  );
+
+  // Legislação Municipal
+  const legis = getFilteredQuestions("legislacao", difficulty);
+  selected.push(
+    ...selectRandomFrom(legis, Math.min(needed.legislacao, legis.length))
+      .map(q => ({ ...q, peso: 2, materia: "legislacao" }))
   );
 
   return selected;
@@ -217,66 +221,33 @@ function loadQuestion() {
     button.addEventListener("click", () => selectAnswer(index));
     optionsContainer.appendChild(button);
   });
-
-  if (window.MathJax) {
-    if (window.MathJax.typesetPromise) {
-      MathJax.typesetPromise([questionText, optionsContainer])
-        .catch((err) => console.log('MathJax Typeset Error in loadQuestion:', err.message));
-    } else if (window.MathJax.typeset) {
-      MathJax.typeset([questionText, optionsContainer]);
-    }
-  }
 }
 
 // === Selecionar Resposta ===
-function selectAnswer(selectedIndex) {
+function selectAnswer(index) {
   if (hasAnswered) return;
   hasAnswered = true;
 
   const question = currentQuestions[currentQuestionIndex];
-  const optionButtons = document.querySelectorAll(".option-btn");
-  optionButtons.forEach(btn => btn.classList.add("disabled"));
+  const buttons = optionsContainer.querySelectorAll(".option-btn");
 
-  let feedbackHTML = "";
+  question.isCorrect = index === question.correct; // marca se acertou
 
-  if (selectedIndex === question.correct) {
-    optionButtons[selectedIndex].classList.add("correct");
+  buttons.forEach((btn, i) => {
+    btn.classList.add("disabled");
+    if (i === question.correct) btn.classList.add("correct");
+    else if (i === index && i !== question.correct) btn.classList.add("wrong");
+  });
+
+  if (index === question.correct) {
     correctAnswers++;
-    const pontosGanhos = calculatePoints(question);
-    score += pontosGanhos;
-    scoreSpan.textContent = score;
-    feedbackHTML = `<p class="feedback correct">✅ Acertou! (+${pontosGanhos} ponto${pontosGanhos > 1 ? 's' : ''})</p>`;
+    score += question.peso;
   } else {
-    optionButtons[selectedIndex].classList.add("wrong");
-    optionButtons[question.correct].classList.add("correct");
     wrongAnswers++;
-    feedbackHTML = `<p class="feedback wrong">❌ Errou!</p>`;
   }
 
-  if (question.explanation) {
-    feedbackHTML += `<p class="explanation">${question.explanation}</p>`;
-  }
-
-  const feedbackDiv = document.createElement("div");
-  feedbackDiv.className = "feedback-container";
-  feedbackDiv.innerHTML = feedbackHTML;
-  optionsContainer.appendChild(feedbackDiv);
-
-  if (window.MathJax) {
-    if (window.MathJax.typesetPromise) {
-      MathJax.typesetPromise([feedbackDiv])
-        .catch((err) => console.log('MathJax Typeset Error in selectAnswer:', err.message));
-    } else if (window.MathJax.typeset) {
-      MathJax.typeset([feedbackDiv]);
-    }
-  }
-
+  scoreSpan.textContent = score;
   nextBtn.classList.remove("hidden");
-}
-
-// === Pontuação com Peso ===
-function calculatePoints(question) {
-  return question && question.peso ? question.peso : 1;
 }
 
 // === Próxima Questão ===
@@ -289,33 +260,41 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// === Resultados ===
+// === Mostrar Resultados ===
 function showResults() {
   showScreen(resultScreen);
+
+  const total = currentQuestions.length;
+  const accuracy = ((correctAnswers / total) * 100).toFixed(1);
+
   finalScore.textContent = score;
   correctAnswersSpan.textContent = correctAnswers;
   wrongAnswersSpan.textContent = wrongAnswers;
-
-  const totalQuestionsAnswered = currentQuestions.length;
-  const accuracy = totalQuestionsAnswered > 0 ? Math.round((correctAnswers / totalQuestionsAnswered) * 100) : 0;
   accuracySpan.textContent = `${accuracy}%`;
 
-  if (accuracy === 100) {
-    resultIcon.innerHTML = "🏆";
-    resultTitle.textContent = "Perfeito!";
-    resultMessage.textContent = "Você gabaritou o quiz!";
-  } else if (accuracy >= 70) {
-    resultIcon.innerHTML = "👏";
-    resultTitle.textContent = "Muito bem!";
-    resultMessage.textContent = "Ótimo desempenho! Continue estudando!";
-  } else {
-    resultIcon.innerHTML = "💪";
-    resultTitle.textContent = "Continue praticando!";
-    resultMessage.textContent = "Revise os conteúdos e tente novamente!";
+  // === Mostra resumo abreviado por matéria no Simulado Completo ===
+  if (currentCategory === "todas") {
+    const resumo = getResumoPorMateria();
+    const abrevs = {
+      portugues: "Port",
+      matematica: "Mat",
+      informatica: "Info",
+      transito: "CTB",
+      legislacao: "Legis"
+    };
+
+    let resumoTexto = Object.entries(resumo)
+      .map(([mat, d]) => {
+        const perc = ((d.acertos / d.total) * 100).toFixed(0);
+        return `${abrevs[mat] || mat}: ${d.acertos}/${d.total} (${perc}%)`;
+      })
+      .join(" | ");
+
+    resultMessage.innerHTML = `<b>Desempenho por Matéria:</b><br>${resumoTexto}`;
   }
 }
 
-// === Resetar Quiz ===
+// === RESET QUIZ ===
 function resetQuiz() {
   currentCategory = "";
   currentDifficulty = "";
@@ -326,8 +305,15 @@ function resetQuiz() {
   correctAnswers = 0;
   wrongAnswers = 0;
   hasAnswered = false;
+}
 
-  categorySelect.value = "portugues";
-  numQuestionsSelect.value = "5";
-  difficultySelect.value = "";
+// === Calcula desempenho por matéria ===
+function getResumoPorMateria() {
+  const resumo = {};
+  currentQuestions.forEach((q) => {
+    if (!resumo[q.materia]) resumo[q.materia] = { total: 0, acertos: 0 };
+    resumo[q.materia].total++;
+    if (q.isCorrect) resumo[q.materia].acertos++;
+  });
+  return resumo;
 }

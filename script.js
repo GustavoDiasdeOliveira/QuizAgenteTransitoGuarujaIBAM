@@ -28,6 +28,7 @@ const questionImage = document.querySelector(".question-image");
 const questionText = document.querySelector(".question-text");
 const optionsContainer = document.querySelector(".options-container");
 const nextBtn = document.getElementById("next-btn");
+const explanationDiv = document.getElementById("explanation")
 
 const resultTitle = document.querySelector(".result-title");
 const finalScore = document.querySelector(".final-score");
@@ -196,6 +197,8 @@ function shuffleArray(array) {
 function loadQuestion() {
   hasAnswered = false;
   nextBtn.classList.add("hidden");
+  explanationDiv.textContent = ""
+  explanationDiv.classList.remove("show")
 
   const question = currentQuestions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
@@ -238,6 +241,17 @@ function selectAnswer(index) {
     if (i === question.correct) btn.classList.add("correct");
     else if (i === index && i !== question.correct) btn.classList.add("wrong");
   });
+
+  // Exibe explicação com ícone de certo ou errado
+  if (question.explanation) {
+    const icon = index === question.correct ? "✅" : "❌";
+    explanationDiv.innerHTML = `<span class="explanation-icon">${icon}</span> ${question.explanation}`;
+    explanationDiv.classList.add("show");
+    explanationDiv.classList.toggle("correct", index === question.correct);
+    explanationDiv.classList.toggle("wrong", index !== question.correct);
+
+    renderMath(); // renderiza expressões matemáticas se houver
+  }
 
   if (index === question.correct) {
     correctAnswers++;
@@ -316,4 +330,11 @@ function getResumoPorMateria() {
     if (q.isCorrect) resumo[q.materia].acertos++;
   });
   return resumo;
+}
+
+// === Renderização de expressões matemáticas (MathJax) ===
+function renderMath() {
+  if (window.MathJax) {
+    MathJax.typesetPromise();
+  }
 }

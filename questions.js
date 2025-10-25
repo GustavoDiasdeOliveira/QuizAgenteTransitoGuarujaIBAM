@@ -2536,6 +2536,106 @@ const questionsDatabase = {
   informatica: {
     facil: [
       {
+        question:
+          "O Microsoft Excel 2016 disponibiliza uma variedade de funções pré-definidas que efetuam uma série de cálculos ou outras ações relacionadas às planilhas. O software somente entende como função aquela digitação que inicia com qual caractere?",
+        options: ["=", ":", "%", "#"],
+        correct: 0,
+        explanation:
+          "Toda e qualquer fórmula ou função no Microsoft Excel deve obrigatoriamente começar com o sinal de igual (=). Este caractere indica ao Excel que o conteúdo da célula é uma expressão a ser calculada.",
+      },
+      {
+        question:
+          "Em uma planilha do Microsoft Excel 2016, um usuário deseja calcular a média aritmética das células de A1 até A10, desconsiderando valores nulos e células que contenham texto. Qual fórmula o usuário deve utilizar para obter o resultado desejado?",
+        options: [
+          '=MÉDIA.SE.SOMA(A1:A10; ">=0")/CONTA()',
+          "=MÉDIA(A1:A10)",
+          '=SOMASE(A1:A10; "<>" ;A1:A10)/CONT.VALORES(A1:A10)',
+          "=SOMA(A1:A10)/CONT.NÚM(A1:A10)",
+        ],
+        correct: 1,
+        explanation:
+          "A função =MÉDIA(A1:A10) no Excel já realiza o cálculo da média aritmética, e por padrão, ignora automaticamente células vazias (nulas) e células que contenham texto, contando apenas os valores numéricos.",
+      },
+      {
+        question:
+          "Conforme o programa Microsoft Excel, qual das fórmulas abaixo retorna o valor 1?",
+        options: [
+          "=MÉDIA(-2;3;2)",
+          "=MÉDIA(-1;8;2)",
+          "=MÉDIA(1;9;2)",
+          "=MÉDIA(1;2;3;4)",
+          "=MÉDIA(1;1;10)",
+        ],
+        correct: 0,
+        explanation:
+          "A função MÉDIA calcula a soma dos números dividida pela quantidade de números. Em A): a soma é -2 + 3 + 2 = 3. A quantidade é 3. 3 / 3 = 1.",
+      },
+      {
+        question:
+          "Segundo o programa Microsoft Word, qual das ferramentas abaixo permite remover toda a formatação do texto selecionado?",
+        options: [
+          "Inserir toda a formatação.",
+          "Limpar toda a formatação.",
+          "Complementar toda a formatação.",
+          "Alterar toda a formatação.",
+          "Implementar toda a formatação.",
+        ],
+        correct: 1,
+        explanation:
+          "O comando 'Limpar toda a formatação' é o recurso específico do Word que remove formatações diretas aplicadas ao texto (como negrito, cor, tamanho da fonte), retornando-o ao estilo de formatação padrão.",
+      },
+      {
+        question:
+          "Segundo o programa Microsoft Word, a ferramenta Contagem de Palavras é capaz de:",
+        options: [
+          "mostrar a quantidade de Comentários.",
+          "mostrar a quantidade de consoantes.",
+          "mostrar a quantidade de memória em Quilobytes do documento.",
+          "mostrar a quantidade de vogais.",
+          "mostrar a quantidade de páginas.",
+        ],
+        correct: 4,
+        explanation:
+          "A ferramenta 'Contagem de Palavras' fornece estatísticas do documento, incluindo número de páginas, palavras, caracteres, parágrafos e linhas.",
+      },
+      {
+        question:
+          "Em um documento do Microsoft Word 2016, caso se deseje mudar a cor da fonte, deve-se acessar o Grupo Fonte que se localiza em qual Guia?",
+        options: ["Layout.", "Inserir.", "Página Inicial.", "Exibir."],
+        correct: 2,
+        explanation:
+          "O Grupo Fonte, que contém os comandos de formatação básica de texto, está localizado na guia Página Inicial do Word.",
+      },
+      {
+        question:
+          "No Microsoft Word 2016, o usuário pode centralizar rapidamente o texto que está editando por meio do atalho de teclado:",
+        options: ["Ctrl + C", "Ctrl + E", "Ctrl + T", "Ctrl + W"],
+        correct: 1,
+        explanation:
+          "O atalho Ctrl + E (de 'Center' em inglês) é o comando padrão no Word para aplicar o alinhamento Centralizado.",
+      },
+      {
+        question:
+          "O comando Área de Impressão permite que o usuário defina a área de uma planilha do Microsoft Excel 2016 que deve ser impressa. Este comando faz parte da Faixa de Opções, guia:",
+        options: ["Inserir.", "Layout da Página.", "Revisão.", "Fórmulas."],
+        correct: 1,
+        explanation:
+          "O comando Área de Impressão, relacionado à configuração da página e da impressão, está localizado na guia Layout da Página do Excel.",
+      },
+      {
+        question:
+          "No Microsoft Excel 2016, caso o usuário some o resultado das funções CONT.VALORES e CONTAR.VAZIO para um mesmo intervalo de células, ele terá como resultado:",
+        options: [
+          "o número total de células desse intervalo.",
+          "o número de células do intervalo que contenham texto.",
+          "o número de células do intervalo que estejam vazias.",
+          "o número de células do intervalo que contenham números ou datas.",
+        ],
+        correct: 0,
+        explanation:
+          "CONT.VALORES conta células não vazias, e CONTAR.VAZIO conta células vazias. A soma das duas é igual ao número total de células do intervalo.",
+      },
+      {
         question: "Qual tecla é usada para copiar um arquivo no Windows 10?",
         options: ["Ctrl+X", "Ctrl+C", "Ctrl+V", "Ctrl+Z"],
         correct: 1,
@@ -2702,7 +2802,8 @@ const questionsDatabase = {
           "A correção automática substitui automaticamente palavras incorretas.",
       },
       {
-        question: "No Sistema Operacional Windows Server 2019, o espaço disponível em múltiplos discos pode ser combinado em uma única unidade, convertendo os discos em",
+        question:
+          "No Sistema Operacional Windows Server 2019, o espaço disponível em múltiplos discos pode ser combinado em uma única unidade, convertendo os discos em",
         options: [
           "Volumes espelhados.",
           "Partições secundárias.",
@@ -2710,7 +2811,8 @@ const questionsDatabase = {
           "unidades lógicas.",
         ],
         correct: 2,
-        explanation: "DINAMICO, porque é possível combinar unidades de disco em uma única unidade e preenchê-los dinamicamente. Pode-se criar, por exemplo, um disco dinâmico contendo 50% do disco A e 50% do disco B e usá-los simultaneamente.",
+        explanation:
+          "DINAMICO, porque é possível combinar unidades de disco em uma única unidade e preenchê-los dinamicamente. Pode-se criar, por exemplo, um disco dinâmico contendo 50% do disco A e 50% do disco B e usá-los simultaneamente.",
       },
       {
         question: "No Windows 10, qual comando fecha uma janela ativa?",
@@ -2881,6 +2983,138 @@ const questionsDatabase = {
       },
     ],
     medio: [
+      {
+        question:
+          "Uma equipe está revisando um relatório de pesquisa no Microsoft Word e deseja aplicar diferentes formatações e organizar o conteúdo de forma profissional. Sobre as funcionalidades disponíveis no editor de textos, assinale a alternativa correta.",
+        options: [
+          "O comando 'Localizar e Substituir' é utilizado apenas para corrigir palavras digitadas incorretamente, sem suporte para alterar formatações ou caracteres especiais.",
+          "O recurso 'Estilos' permite padronizar títulos, subtítulos e parágrafos, além de facilitar a criação automática de um sumário no documento.",
+          "A 'Quebra de Página' é usada exclusivamente para dividir o documento em páginas, não podendo ser combinada com quebras de seção para configurar cabeçalhos diferentes.",
+          "O 'Modo de Exibição de Rascunho' no Word é ideal para impressão, pois mostra o layout final da página, incluindo margens e numeração.",
+        ],
+        correct: 1,
+        explanation:
+          "O uso de Estilos (Título 1, Título 2, etc.) no Word é fundamental para padronizar a formatação e é o que habilita a criação automática do Sumário.",
+      },
+      {
+        question:
+          "No uso do MS-Excel 2016, como se classifica corretamente a capacidade de utilizar fórmulas e funções em uma planilha?",
+        options: [
+          "O Excel permite apenas cálculos simples, como adição ou subtração, sem suporte para funções avançadas.",
+          "O Excel 2016 não suporta a obtenção de dados externos para análise em suas planilhas.",
+          "Fórmulas no Excel não podem ser usadas para referenciar células de outras planilhas dentro do mesmo arquivo.",
+          "No Excel 2016, não é possível criar gráficos a partir de dados inseridos em tabelas.",
+          "Fórmulas e funções no Excel podem automatizar cálculos e análises de dados, aumentando significativamente a eficiência do trabalho.",
+        ],
+        correct: 4,
+        explanation:
+          "O objetivo principal das fórmulas e funções é automatizar o processamento de dados e permitir análises complexas, aumentando a eficiência do usuário.",
+      },
+      {
+        question:
+          "De acordo com o programa Microsoft Excel, qual das ferramentas abaixo pode ser utilizada para calcular, resumir e analisar os dados que lhe permitem ver comparações, padrões e tendências nos dados?",
+        options: [
+          "Imagens.",
+          "Verificar acessibilidade.",
+          "Linha de Assinatura.",
+          "Plano de fundo.",
+          "Tabela Dinâmica.",
+        ],
+        correct: 4,
+        explanation:
+          "A Tabela Dinâmica (Pivot Table) é a ferramenta do Excel dedicada a resumir e analisar grandes volumes de dados de forma flexível, permitindo a identificação de padrões e tendências.",
+      },
+      {
+        question:
+          "De acordo com o programa Microsoft Excel, qual das ferramentas abaixo pode ser utilizada para filtrar dados em uma Tabela ou Tabela Dinâmica com facilidade?",
+        options: [
+          "Linha de Assinatura.",
+          "Imagens.",
+          "Cabeçalho e Rodapé.",
+          "Link.",
+          "Segmentação de Dados.",
+        ],
+        correct: 4,
+        explanation:
+          "A Segmentação de Dados (Slicer) é uma ferramenta visual e interativa que facilita a aplicação de filtros em Tabelas e Tabelas Dinâmicas.",
+      },
+      {
+        question:
+          "Segundo o programa Microsoft Word, qual das sequências é válida para transformar parte do documento em colunas?",
+        options: [
+          "Selecionar os parágrafos que você deseja colocar em colunas -> Selecionar a guia Inserir -> Selecionar Colunas.",
+          "Selecionar os parágrafos que você deseja colocar em colunas -> Selecionar a guia Design -> Selecionar Colunas.",
+          "Selecionar os parágrafos que você deseja colocar em colunas -> Selecionar a guia Página inicial -> Selecionar Colunas.",
+          "Selecionar os parágrafos que você deseja colocar em colunas -> Selecionar a guia Referências -> Selecionar Colunas.",
+          "Selecionar os parágrafos que você deseja colocar em colunas -> Selecionar a guia Layout -> Selecionar Colunas.",
+        ],
+        correct: 4,
+        explanation:
+          "As opções de Colunas, que são configurações de página, estão localizadas na guia Layout (ou Layout da Página, em algumas versões).",
+      },
+      {
+        question:
+          "Considerando os componentes básicos da Faixa de Opções do Microsoft Word 2016, tem-se que: I. cada uma das Guias representa uma área de atividade e, em cada uma delas, os comandos são reunidos por grupos. II. Cada guia tem vários grupos que mostram os itens relacionados em conjunto. III. Um comando é um botão, uma caixa para inserir informações ou um menu.",
+        options: [
+          "Apenas os itens I e II estão corretos.",
+          "Apenas os itens I e III estão corretos.",
+          "Apenas os itens II e III estão corretos.",
+          "Os itens I, II e III estão corretos.",
+        ],
+        correct: 3,
+        explanation:
+          "A Faixa de Opções (Ribbon) é hierarquizada em Guias, que contêm Grupos de comandos, e estes comandos podem ser botões, caixas de inserção ou menus.",
+      },
+      {
+        question:
+          "No Microsoft Excel 2016, caso queira inserir, rastrear e personalizar funções e cálculos você deve acessar qual das Guias abaixo?",
+        options: ["Dados.", "Revisão.", "Exibir.", "Fórmulas."],
+        correct: 3,
+        explanation:
+          "A guia Fórmulas é a área dedicada a todas as operações de cálculo, incluindo a inserção de funções e o uso das ferramentas de Auditoria de Fórmulas (rastreio).",
+      },
+      {
+        question:
+          "O Microsoft Word 2016 possui um conjunto de ferramentas para a criação de documentos de mala direta, como o comando Envelopes e o comando Etiquetas, os quais fazem parte da Faixa de Opções, na guia:",
+        options: ["Design.", "Página Inicial.", "Exibir.", "Correspondências."],
+        correct: 3,
+        explanation:
+          "Todas as ferramentas relacionadas à criação de documentos em massa e personalização (Mala Direta, Envelopes e Etiquetas) estão agrupadas na guia Correspondências (Mailings).",
+      },
+      {
+        question:
+          "A ferramenta do Microsoft Word 2016 que permite criar links para outras partes do documento, como títulos, gráficos ou tabelas, é chamada de:",
+        options: [
+          "Citação.",
+          "Referência Cruzada.",
+          "Comentários.",
+          "Mala Direta.",
+        ],
+        correct: 1,
+        explanation:
+          "A Referência Cruzada é a ferramenta usada para criar links dinâmicos que apontam para elementos específicos dentro do mesmo documento (títulos, tabelas, figuras), facilitando a navegação.",
+      },
+      {
+        question:
+          "Em uma pasta de trabalho do Microsoft Excel 2016 composta por diversas planilhas, o usuário deseja em uma fórmula da planilha 'Resumo' referenciar a célula D3 da planilha 'Detalhes'. Para isso, deve ser utilizada a referência:",
+        options: ["D3:Detalhes", "D3!Detalhes", "Detalhes!D3", "Detalhes,D3"],
+        correct: 2,
+        explanation:
+          "A sintaxe correta para referenciar uma célula em outra planilha é: NomeDaPlanilha!Célula. Portanto, o correto é Detalhes!D3.",
+      },
+      {
+        question:
+          "No Microsoft Excel 2016, a fórmula =MENOR(A1:B10;5) tem por objetivo:",
+        options: [
+          "Retornar os cinco menores valores no intervalo de células entre A1 e B10.",
+          "Retornar todos os valores menores do que cinco no intervalo de células entre A1 e B10.",
+          "Retornar o quinto menor valor no intervalo de células entre A1 e B10.",
+          "Retornar uma matriz com as cinco primeiras linhas do intervalo de células entre A1 e B10.",
+        ],
+        correct: 2,
+        explanation:
+          "A função =MENOR(matriz; k) retorna o k-ésimo menor valor da matriz (intervalo). Com k=5, a função retorna o quinto menor valor.",
+      },
       {
         question:
           "Qual atalho do Windows 10 permite alternar rapidamente entre janelas abertas?",
@@ -3336,6 +3570,67 @@ const questionsDatabase = {
     dificil: [
       {
         question:
+          "A utilização da internet e das ferramentas Microsoft Office é essencial no ambiente corporativo, exigindo conhecimento sobre funcionalidades avançadas para garantir a eficiência nas tarefas. Entre os aspectos importantes está o uso de recursos específicos do Word e do Excel Integrados a serviços online. Com base nesse contexto, assinale a alternativa correta.",
+        options: [
+          "Ativar o 'Modo de Compatibilidade' no Word é essencial ao trabalhar com versões diferentes do software, pois converte automaticamente o arquivo para o formato mais recente.",
+          "Compartilhar planilhas do Excel por meio do OneDrive requer a ativação do recurso 'Permitir edição' para que os colaboradores possam modificar o conteúdo simultaneamente.",
+          "A utilização do recurso 'Power Query' no Excel permite criar gráficos e apresentações dinâmicas diretamente a partir de tabelas armazenadas localmente.",
+          "Utilizar o recurso 'Salvar como' no Word permite armazenar o arquivo diretamente em serviços de nuvem, como o OneDrive.",
+        ],
+        correct: 1,
+        explanation:
+          "Para permitir a coautoria (edição simultânea) em um arquivo compartilhado via OneDrive ou SharePoint, é necessário conceder a permissão de 'Permitir edição'.",
+      },
+      {
+        question:
+          "O Microsoft Excel permite a criação de gráficos dinâmicos que são atualizados automaticamente, conforme as alterações nos dados originais. Esses gráficos facilitam a personalização e Interatividade das visualizações, sendo amplamente utilizados em análises de dados. Sobre esse tema, assinale a alternativa correta.",
+        options: [
+          "A atualização automática de gráficos dinâmicos ocorre somente se os dados forem vinculados manualmente ao gráfico por meio da opção 'Selecionar Dados' na aba 'Design'.",
+          "Criar um gráfico dinâmico no Excel exige que os dados estejam em uma Tabela do Excel, o que garante que o gráfico será atualizado automaticamente quando os dados forem alterados.",
+          "Gráficos dinâmicos no Excel não permitem a aplicação de filtros diretamente no gráfico, sendo necessário modificar os dados na tabela original para personalizar a visualização.",
+          "Um gráfico dinâmico só pode ser criado a partir de uma tabela dinâmica, não sendo possível configurá-lo diretamente.",
+        ],
+        correct: 1,
+        explanation:
+          "A formatação dos dados-fonte como uma 'Tabela do Excel' (Ctrl+T) é a forma mais eficaz e garantida para que os gráficos (dinâmicos ou comuns) tenham seus intervalos de dados ajustados e se atualizem automaticamente ao adicionar novas linhas.",
+      },
+      {
+        question:
+          "Diante da seguinte situação: alguém está trabalhando em um documento importante no Microsoft Word 2016 e precisa inserir um índice analítico remissivo para facilitar a navegação do leitor. No entanto, ao tentar gerar o índice, ele percebe que não está sendo criado corretamente. Qual das alternativas abaixo não representa um motivo pelo qual o índice analítico remissivo pode não estar sendo gerado corretamente no Word 2016?",
+        options: [
+          "O documento não foi salvo antes da geração do índice.",
+          "As entradas do índice não foram marcadas com o estilo 'Entrada de Índice'.",
+          "O documento não possui marcas de parágrafo definidas.",
+          "A opção 'Inserir índice analítico' não foi selecionada no menu 'Referências'.",
+        ],
+        correct: 0,
+        explanation:
+          "A falha na geração do índice ocorre por falta de marcação de entradas (B) ou por não usar o comando correto (D). Salvar o documento (A) é uma boa prática, mas não é uma condição técnica para a criação do índice.",
+      },
+      {
+        question:
+          "Considerando a funcionalidade do MS-Word 2016, julgue as seguintes afirmações como verdadeiras (V) ou falsas (F). 1. O Word permite a inserção de Índices automáticos que ajudam na organização e na navegação do documento. 2. A edição de texto no Word não permite alterar a orientação de uma página individual sem afetar as demais. 3. No Word, todos os documentos devem começar com uma quebra de página automática. Assinale a alternativa cuja respectiva ordem de julgamento esteja correta.",
+        options: [
+          "V – F – V.",
+          "F – V – F.",
+          "F – F – F.",
+          "V – F – F.",
+          "F – F – V.",
+        ],
+        correct: 3,
+        explanation:
+          "1. V (Verdadeira - Os sumários automáticos usam os Estilos de Título). 2. F (Falsa - É possível alterar a orientação de uma página isoladamente usando Quebras de Seção). 3. F (Falsa - O documento começa com uma página simples, não havendo obrigatoriedade de Quebra de Página no início).",
+      },
+      {
+        question:
+          "O comando Dividir da Faixa de Opções do Microsoft Word 2016, permite dividir a janela de um documento, exibindo duas seções deste documento simultaneamente. Esse comando pode ser ativado por meio do atalho de teclado:",
+        options: ["Ctrl + S", "Ctrl + Alt + S", "Ctrl + T", "Ctrl + Alt + T"],
+        correct: 1,
+        explanation:
+          "O atalho Ctrl + Alt + S (ou Ctrl + Alt + V em algumas versões) é o atalho específico do Word para ativar o recurso Dividir Janela, permitindo a visualização simultânea de duas partes do mesmo documento.",
+      },
+      {
+        question:
           "No Windows 10, qual comando do PowerShell lista todos os processos em execução?",
         options: ["Get-Process", "tasklist", "ps -aux", "List-Process"],
         correct: 0,
@@ -3765,6 +4060,60 @@ const questionsDatabase = {
   // ================= CTB Transito =================
   transito: {
     facil: [
+      {
+        question:
+          "Ao prestar os primeiros socorros a um acidentado e notar que ele está com a pele fria e viscosa ou úmida e pegajosa, conclui-se que ele está:",
+        options: [
+          "a) com icterícia.",
+          "b) em estado de choque.",
+          "c) em óbito.",
+          "d) com hipercarotenemia.",
+          "e) com parada cardiorrespiratória.",
+        ],
+        correct: "b",
+        explanation:
+          "Pele fria e 'suada/pegajosa' (viscosa) é o principal sinal de que a pessoa está entrando em choque, pois o corpo desvia o sangue das extremidades para os órgãos vitais.",
+      },
+      {
+        question:
+          "Dos cuidados seguintes, o que deve ser evitado em uma fratura exposta é:",
+        options: [
+          "a) manter a área imóvel.",
+          "b) cobrir o local com um pano limpo.",
+          "c) movimentar o osso exposto para verificar a extensão.",
+          "d) evitar contato direto com o ferimento.",
+          "e) chamar ajuda médica imediatamente.",
+        ],
+        correct: "c",
+        explanation:
+          "Fratura exposta (osso para fora): NUNCA toque ou tente mover o osso. Isso pode causar mais danos a tecidos e vasos sanguíneos. Apenas imobilize e cubra.",
+      },
+      {
+        question:
+          "De acordo com o Código de Trânsito Brasileiro, o condutor ao trafegar por túneis ou sob chuva, neblina e cerração deve fazer uso do(a)",
+        options: [
+          "luz alta.",
+          "luz baixa.",
+          "luz intermitente.",
+          "pisca-alerta.",
+        ],
+        correct: 1,
+        explanation:
+          "O Art. 40 do CTB estabelece que, mesmo durante o dia, o condutor deve usar luz baixa ao trafegar em túneis, sob chuva, neblina ou cerração.",
+      },
+      {
+        question:
+          "De acordo com o Código de Trânsito Brasileiro, a sinalização terá a seguinte ordem de prevalência: I. as ordens do agente de trânsito sobre as normas de circulação e outros sinais. II. as indicações do semáforo sobre os demais sinais. III. as indicações dos sinais sobre as demais normas de trânsito. É correto o que se afirma em",
+        options: [
+          "III, apenas.",
+          "I e II, apenas.",
+          "II e III, apenas.",
+          "I, II e III.",
+        ],
+        correct: 3,
+        explanation:
+          "O Art. 89 do CTB estabelece a ordem hierárquica completa de prevalência: Ordens do Agente > Semáforo > Sinais > Normas de Trânsito.",
+      },
       {
         question:
           "De acordo com o Art. 28 do CTB, o condutor deverá, a todo momento, ter domínio de seu veículo, dirigindo-o com:",
@@ -4269,6 +4618,74 @@ const questionsDatabase = {
     ],
 
     medio: [
+      {
+        question:
+          "Em situações de emergência, assinale a alternativa correta sobre práticas seguras de primeiros socorros:",
+        options: [
+          "a) A posição lateral de segurança deve ser realizada em situações de trauma ou suspeitas de trauma.",
+          "b) É apropriado dar água com açúcar a toda pessoa em estado de choque.",
+          "c) Vítimas que apresentem respiração agônica devem ser colocadas na posição lateral de segurança.",
+          "d) Se a vítima estiver inconsciente, mas respirando, deve ser colocada na posição lateral de segurança.",
+        ],
+        correct: "d",
+        explanation:
+          "A Posição Lateral de Segurança (PLS) é para quem está desmaiado (inconsciente) e respirando, para evitar sufocamento por vômito ou pela língua.",
+      },
+      {
+        question:
+          "Assinale a alternativa que menciona corretamente como deve ser o atendimento inicial em uma situação de queimadura leve causada por exposição ao calor.",
+        options: [
+          "a) Envolver a queimadura com um tecido aquecido para manter a temperatura.",
+          "b) Estourar as bolhas que se formarem para evitar infecção.",
+          "c) Resfriar a área queimada com água corrente fria por pelo menos 10 minutos.",
+          "d) Passar pomada ou óleo sobre a área queimada para evitar bolhas.",
+          "e) Colocar gelo diretamente sobre a queimadura para acelerar o alívio da dor.",
+        ],
+        correct: "c",
+        explanation:
+          "Queimadura leve: jogar água corrente fria por 10 minutos é a primeira e mais importante medida para interromper a queimadura e aliviar a dor.",
+      },
+      {
+        question:
+          "O CTB, no capítulo que trata da engenharia de tráfego, estabelece que nenhuma obra que possa interferir na livre circulação de veículos e pedestres, será iniciada sem a permissão prévia do órgão ou entidade de trânsito com circunscrição sobre a via. Neste caso, a obrigação quanto à sinalização do local, é:",
+        options: [
+          "da Prefeitura do município, por meio dos agentes de controle de Trânsito.",
+          "do DETRAN – Departamento Estadual de Trânsito, local.",
+          "do responsável pela execução ou manutenção da obra ou do evento.",
+          "da Secretaria Municipal de Mobilidade e Trânsito.",
+          "do CET - Companhia de Engenharia de Tráfego.",
+        ],
+        correct: 2,
+        explanation:
+          "De acordo com o Art. 94 do CTB, a responsabilidade pela sinalização de qualquer obstáculo na via é sempre do responsável pela sua execução ou manutenção.",
+      },
+      {
+        question:
+          "Uma loja situada em uma esquina de uma via de grande tráfego, utilizou em suas peças de publicidade e propaganda na fachada do imóvel, uma iluminação de LED que promove um grande índice de iluminação, na cor amarela. De acordo com o estabelecido no CTB, no que se refere à sinalização de trânsito, tal situação é considerada:",
+        options: [
+          "Irregular, pois poderá gerar confusão, interferir na visibilidade da sinalização e comprometer a segurança do trânsito.",
+          "regular, em razão de contar com autorização prévia, sem a qual a alimentação energética da instalação não seria possível de ser realizada.",
+          "legal, já que iluminação existente em imóveis ou estabelecimentos comerciais/industriais, por estarem nos limites do terreno ou nas fachadas dos imóveis, constituem uma situação regular.",
+          "Imprópria, pois os órgãos públicos e administrativos não autorizam a colocação de iluminação nas fachadas dos imóveis.",
+        ],
+        correct: 0,
+        explanation:
+          "O CTB (Art. 88, Parágrafo único) proíbe a colocação de luzes, publicidade ou vegetação que possam comprometer a segurança ou gerar confusão com a sinalização.",
+      },
+      {
+        question:
+          "É permitida a circulação de pedestres, na pista de rolamento, feita com prioridade sobre os veículos, pelos bordos da pista, em fila única, em sentido contrário ao deslocamento de veículos, exceto em locais proibidos pela sinalização e nas situações em que a segurança ficar comprometida, quando:",
+        options: [
+          "o trajeto do deslocamento sobre a pista não aumentar o percurso do usuário e desde que este não pare sobre a via sem necessidade.",
+          "houver sinalização pertinente e o foco de pedestres obedecer às indicações das luzes.",
+          "se tratar de vias urbanas ou de acostamentos em vias rurais para circulação.",
+          "existirem faixas ou passagens para uso desse público, e esta estiver a uma distância maior que 50 metros do local.",
+          "não houver acostamento ou quando não for possível a utilização desse.",
+        ],
+        correct: 4,
+        explanation:
+          "A circulação de pedestres na pista de rolamento só é permitida onde não houver acostamento ou calçada, ou quando não for possível utilizá-los (Art. 254, Parágrafo único do CTB).",
+      },
       {
         // Questão fornecida 1
         question:
@@ -5483,6 +5900,34 @@ const questionsDatabase = {
     dificil: [
       {
         question:
+          "Em caso de fratura em um membro, quais são os procedimentos básicos para imobilizar a área afetada?",
+        options: [
+          "a) Amarrar o membro com qualquer tipo de material e movimentá-lo levemente para testar a imobilização.",
+          "b) Manter o membro elevado e pedir que a vítima faça movimentos para verificar a dor.",
+          "c) Colocar uma tala rígida ao longo do membro afetado e mantê-lo imóvel até que o socorro especializado chegue.",
+          "d) Massagear a área afetada para aliviar o desconforto e aumentar a circulação.",
+          "e) Aplicar gelo diretamente na pele do membro afetado para reduzir o inchaço.",
+        ],
+        correct: "c",
+        explanation:
+          "Fratura: Imobilizar com uma tala rígida para evitar que o osso se mova, prevenindo lesões secundárias e reduzindo a dor até a chegada do socorro.",
+      },
+      {
+        question:
+          "O CTB estabelece que respeitada a capacidade máxima de tração da unidade tratora, podem conduzir combinação de veículos cuja unidade tratora se enquadre na respectiva categoria de habilitação e cuja unidade acoplada, reboque, semirreboque, trailer ou articulada tenha menos de 6.000 kg de peso bruto total, e cuja lotação não exceda a 8 lugares. Tais características voltadas à condução de veículos automotores, se aplica aos condutores com habilitação nas categorias:",
+        options: [
+          "A) B e C.",
+          "B) B, C, D e E.",
+          "C) D e E.",
+          "D) B, C e D.",
+          "E) C e D.",
+        ],
+        correct: 4,
+        explanation:
+          "A combinação de veículos (unidade tratora + reboque) cuja unidade acoplada tenha até 6.000 kg de PBTC, e lotação até 8, é a descrição de parte da Categoria E, que exige que o condutor possua C ou D. O examinador buscou a categoria do veículo trator pesado (C) e de passageiros (D), que são as mais completas neste contexto. A Categoria E é a correta, mas a alternativa C e D (pré-requisitos) é a indicada como gabarito.",
+      },
+      {
+        question:
           "Segundo o CTB, qual a penalidade para quem disputa corrida (racha)?",
         options: [
           "Multa e 5 pontos",
@@ -6033,6 +6478,32 @@ const questionsDatabase = {
     facil: [
       {
         question:
+          "De acordo com o Art. 14 do Decreto Municipal n° 14.719/2021, no exercício da atividade de fretamento:",
+        options: [
+          "a) É permitido o transporte de passageiros em pé, desde que respeitado o limite de velocidade.",
+          "b) O transporte de passageiros em pé será permitido apenas em áreas urbanas do Município de Guarujá.",
+          "c) É vedado o transporte de passageiros menores de idade, mesmo acompanhados.",
+          "d) É vedado o transporte de passageiros em pé, devendo ser respeitada a capacidade original de lotação de passageiros sentados do veículo.",
+        ],
+        correct: "d",
+        explanation:
+          "Em fretamento, não se pode levar passageiros em pé. A lotação é apenas sentada, conforme a capacidade original do veículo.",
+      },
+      {
+        question:
+          "Segundo o § 2° do Art. 164 da Lei Municipal n° 44/1998, todo veículo que transportar cargas perigosas deverá portar:",
+        options: [
+          "a) Apenas a documentação da carga..",
+          "b) Equipamentos de segurança individual para os motoristas..",
+          "c) Rótulos de risco e painéis de segurança específicos, conforme normas da ABNT, em local adequado e visível.",
+          "d) Autorização exclusiva da Polícia Rodoviária.",
+        ],
+        correct: "c",
+        explanation:
+          "Carga perigosa precisa de etiquetas (rótulos e painéis) visíveis na parte externa, conforme a norma ABNT, para correta identificação do risco.",
+      },
+      {
+        question:
           "Segundo a Lei Complementar nº 216/2017 (Política Municipal de Mobilidade Urbana), qual modal de transporte possui prioridade na política sobre o motorizado individual?",
         options: [
           "Veículos de Emergência.",
@@ -6088,6 +6559,32 @@ const questionsDatabase = {
       },
     ],
     medio: [
+      {
+        question:
+          "Conforme o Art. 4° do Decreto Municipal n° 14.719/2021, após o deferimento e a emissão da Autorização de Entrada de Veículos, o interessado ou solicitante:",
+        options: [
+          "a) Deverá providenciar o envio da cópia da nota fiscal de serviço de transporte ao endereço eletrônico: autorizacaotransporte.sedecon@gmail.com",
+          "b) Poderá apresentar a nota fiscal impressa apenas no momento da entrada no município",
+          "c) Está dispensado de enviar qualquer documento adicional.",
+          "d) Deverá apresentar a nota fiscal pessoalmente na sede da SEDECON no prazo de 48 horas.",
+        ],
+        correct: "a",
+        explanation:
+          "Após a autorização, tem que enviar a nota fiscal de serviço de transporte para o e-mail específico, conforme exigência do decreto.",
+      },
+      {
+        question:
+          "Conforme o Art. 6° do Decreto Municipal n° 12.827/2018, veículos que transportem cargas superdimensionadas ou perigosas somente poderão circular pelas vias do Município:",
+        options: [
+          "a) Mediante Autorização Especial de Trânsito e escolta, sob taxação de acordo com o Decreto Municipal n° 8.879 de 18/03/2010.",
+          "b) Livremente, desde que possuam seguro de carga válido.",
+          "c) Apenas com autorização da Polícia Militar, sem necessidade de escolta ou taxação.",
+          "d) Mediante autorização da Secretaria Municipal de Meio Ambiente, independente de escolta.",
+        ],
+        correct: "a",
+        explanation:
+          "Cargas especiais precisam de Autorização Especial de Trânsito (AET), escolta (se exigido) e o pagamento de taxa para circular com segurança e dentro da lei.",
+      },
       {
         question:
           "Segundo o Código de Posturas, qual a penalidade para estacionar em local proibido reincidentemente?",
@@ -6562,6 +7059,19 @@ const questionsDatabase = {
     ],
 
     dificil: [
+      {
+        question:
+          "De acordo com o § 2° do Art. 282 da Lei Complementar n° 44/1998, em caso de iminente risco à saúde ou segurança, o órgão competente deve:",
+        options: [
+          "a) Solicitar uma autorização judicial para realizar a vistoria.",
+          "b) Aguardar a autorização do proprietário ou responsável antes de agir.",
+          "c) Encaminhar o caso à polícia antes de realizar a vistoria.",
+          "d) Realizar a vistoria imediatamente, podendo inclusive proceder ao arrombamento do imóvel",
+        ],
+        correct: "d",
+        explanation:
+          "Risco grave e imediato: A autoridade age na hora, sem esperar permissão ou ordem judicial, podendo até arrombar se for a única forma de evitar o risco à saúde ou segurança pública.",
+      },
       {
         question:
           "(Lei Municipal nº 44/1998 - CP) De acordo com o Código de Posturas do Município de Guarujá, no que concerne à disciplina da circulação e estacionamento de veículos (Art. 164), é correto afirmar que:",
